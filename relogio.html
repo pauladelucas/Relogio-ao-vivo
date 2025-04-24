@@ -1,0 +1,92 @@
+<<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relógio de Brasília para YouTube</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000; /* Fundo preto */
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .clock-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .clock {
+            color: #FFF;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+        
+        .time {
+            font-size: 5em;
+            font-weight: bold;
+        }
+        
+        .date {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+        
+        .location {
+            font-size: 1.2em;
+            margin-top: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <div class="clock">
+            <div class="time" id="time">00:00:00</div>
+            <div class="date" id="date">1 de janeiro de 2023</div>
+            <div class="location">Horário de Brasília (UTC-3)</div>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            // Configura o fuso horário de Brasília (UTC-3)
+            const options = {
+                timeZone: 'America/Sao_Paulo',
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            
+            const dateOptions = {
+                timeZone: 'America/Sao_Paulo',
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            };
+            
+            const now = new Date();
+            
+            // Formata a hora
+            const timeStr = now.toLocaleTimeString('pt-BR', options);
+            document.getElementById('time').textContent = timeStr;
+            
+            // Formata a data
+            const dateStr = now.toLocaleDateString('pt-BR', dateOptions);
+            document.getElementById('date').textContent = dateStr;
+            
+            // Atualiza a cada segundo
+            setTimeout(updateClock, 1000);
+        }
+        
+        // Inicia o relógio
+        updateClock();
+    </script>
+</body>
+</html>
